@@ -43,7 +43,9 @@ int main(void){
 				return -1;
 			}
 			else if (modifyOrRead == ('m')){
-				printf("modify");
+			scanf("%s", &cellsArray[activeCell].charData);
+			printf("%s", &cellsArray[activeCell].charData); /*debugging*/
+
 			}
 			else{ 
 					printf("read");
