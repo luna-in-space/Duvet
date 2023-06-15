@@ -52,7 +52,7 @@ int main(void){
 	printf("What would you like to do? (m)odify value/(r)ead value/(q)uit program: ");
 	scanf(" %c", &modifyOrRead);
 		modifyOrRead = tolower(modifyOrRead);
-			if (modifyOrRead != ('m') && (modifyOrRead != 'r' && (modifyOrRead != 'q'))){
+			if (modifyOrRead != 'm' && modifyOrRead != 'r' && modifyOrRead != 'q'){
 
 			printf("error, must enter m or r\n");
 				return -1;
@@ -69,5 +69,8 @@ int main(void){
 				}
 	}
 
+	for(int i = 0; i < 400; i++) {
+		free(cellsArray[i].charData);	
+	}
 	return 0;
 }
