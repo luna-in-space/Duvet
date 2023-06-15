@@ -10,3 +10,4 @@ because of how the cell picker is written, it is possible to access cells in str
 There are also very many ways to segfault, try your best not to :)
 
 Also this program has a massive memory leak everytime it runs, your operating system should clean it up though.
+It's only possible to write integers into cells
