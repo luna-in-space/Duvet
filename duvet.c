@@ -18,10 +18,14 @@ typedef struct cell{
 
 cell cellsArray[ROWS * COLUMNS];
 
-
+void freeCellMemory(int cellIndex){
+		free(cellsArray[cellIndex].charData);	
+		cellsArray[cellIndex].charData = NULL;
+		return;
+}
 int cellpicker(int row, int column){
 
-	int activeCell = ((column + (row -1) *20));
+	int activeCell = ((column-1) + (row -1) *COLUMNS);
 
 	return activeCell;
 }
@@ -60,13 +64,12 @@ void cellModifier(int activeCell){
 	}
 
 void cellReader(int activeCell){
-	switch (cellsArray[activeCell].isChar){
-		case 0:
-		printf("the cell contains the integer"ANSI_COLOR_MAGENTA" %d\n"ANSI_COLOR_RESET, cellsArray[activeCell].numberData);
-		break;
-		case 1:
-		printf("the cell contains the label" ANSI_COLOR_MAGENTA "%s\n" ANSI_COLOR_RESET, cellsArray[activeCell].charData);	
+	if (cellsArray[activeCell].isChar == 0){
+		printf("the cell contains the integer "ANSI_COLOR_MAGENTA" %d\n"ANSI_COLOR_RESET, cellsArray[activeCell].numberData);
 	}
+		else{
+		printf("the cell contains the label " ANSI_COLOR_MAGENTA "%s\n" ANSI_COLOR_RESET, cellsArray[activeCell].charData);	
+		}
 		return;
 }
 int main(void){
@@ -74,6 +77,7 @@ int main(void){
 	int activeColumn;
 	for(int i = 0; i < ROWS * COLUMNS; i++){
 		cellsArray[i].charData = malloc(32 * sizeof(char)); //Allocates 32 bytes of memory for character data per cell
+		cellsArray[i].charData = NULL;
 	}
 	while(1){
 	printf("Choose your row (1-%d), or 0 to quit:", ROWS);
@@ -95,10 +99,10 @@ int main(void){
 		int activeCell = cellpicker(activeRow, activeColumn);
 //	printf("%d", activeCell); /*just making sure cellpicker works*/
 	char modifyOrRead; 
-	printf("What would you like to do? (m)odify value/(r)ead value");
+	printf("What would you like to do? (M)odify value/(R)ead value");
 	scanf(" %c", &modifyOrRead);
 		modifyOrRead = tolower(modifyOrRead);
-			if (modifyOrRead != 'm' && modifyOrRead != 'r' && modifyOrRead != 'q'){
+			if (modifyOrRead != 'm' && modifyOrRead != 'r'){
 
 			fprintf(stderr, "error, must enter m or r\n");
 				return -1;
@@ -112,9 +116,9 @@ int main(void){
 				cellReader(activeCell);
 				}
 	}
-
-	for(int i = 0; i < 400; i++) {
-		free(cellsArray[i].charData);	
+	for (int i = 0; i < ROWS * COLUMNS; i++){
+	freeCellMemory(i);
 	}
+
 	return 0;
 }
