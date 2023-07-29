@@ -1,0 +1,4 @@
+This is a CLI program which has a 20x20 grid (in reality a flat 400x1 grid, however it is helpful to think of it as a 20x20 grid.) 
+
+It is possible to input either integer data or character data into a cell, and the read it later.
+The program knows if a cell has an integer or a character in it, and it will read out the relevant data
