@@ -2,6 +2,7 @@
 #include<string.h>
 #include<ctype.h>
 #include<stdlib.h>
+#include<string.h>
 #define ROWS 20
 #define COLUMNS 20 
 //define ANSI escape codes, these are there to make certain output in different colors, so the output is more readable
@@ -11,7 +12,7 @@ typedef struct cell{
 	int id;
 	char* charData;
 	int  numberData;
-	int charOrNum;
+	int isChar;
 	} cell;
 
 cell cellsArray[400];
@@ -26,7 +27,7 @@ int cellpicker(int row, int column){
 
 void cellModifier(int activeCell){
 	char numOrChar;
-	char* charInput[32];
+	char charInput[32];
 	int intInput;
 
 	printf("Would you like to put (N)umber data or (C)haracter data:");
@@ -39,16 +40,16 @@ void cellModifier(int activeCell){
 		printf("Input your data:");
 			scanf("%d", &intInput);
 			cellsArray[activeCell].numberData = intInput; 
-			cellsArray[activeCell].charOrNum = 1; //suggestion: it may be smarter to do this with boolean, and just do [isChar = true/false]
+			cellsArray[activeCell].isChar = 0; //suggestion: it may be smarter to do this with boolean, and just do [isChar = true or false]
 		break;
 		
 		case 'C':
 		case 'c':
 		printf("case c");
 		printf("Input your data:");
-				scanf("%s", &charInput);
-		cellsArray[activeCell].charData = charInput;
-		cellsArray[activeCell].charOrNum = 0; //used for cellReader to know what data is in the cell
+				scanf("%31s", charInput);
+		cellsArray[activeCell].charData = strdup(charInput);
+		cellsArray[activeCell].isChar = 1; //used for cellReader to know what data is in the cell
 		break;
 
 		default:
@@ -60,7 +61,13 @@ void cellModifier(int activeCell){
 	}
 
 void cellReader(int activeCell){
-	printf("the cell contains the integer"ANSI_COLOR_MAGENTA" %d\n"ANSI_COLOR_RESET, cellsArray[activeCell].numberData);
+	switch (cellsArray[activeCell].isChar){
+		case 0:
+		printf("the cell contains the integer"ANSI_COLOR_MAGENTA" %d\n"ANSI_COLOR_RESET, cellsArray[activeCell].numberData);
+		break;
+		case 1:
+		printf("the cell contains the label" ANSI_COLOR_MAGENTA "%s\n" ANSI_COLOR_RESET, cellsArray[activeCell].charData);	
+	}
 		return;
 }
 int main(void){
