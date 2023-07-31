@@ -1,2 +1,2 @@
 main:
-	gcc -pedantic duvet.c -Wall -Wextra -o duvet
+	gcc -pedantic cell.c duvet.c -Wall -Wextra -o duvet

@@ -2,3 +2,5 @@ This is a CLI program which has a 20x20 grid (in reality a flat 400x1 grid, howe
 
 It is possible to input either integer data or character data into a cell, and the read it later.
 The program knows if a cell has an integer or a character in it, and it will read out the relevant data
+currently it is *only* possible to have integer data in a cell, not floating point data.
+in the future it will likely be possible to have floating point data and equations in cells, however that would likely require a lot of changes to the code
