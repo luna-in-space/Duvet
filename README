@@ -4,3 +4,5 @@ It is possible to input either integer data or character data into a cell, and t
 The program knows if a cell has an integer or a character in it, and it will read out the relevant data
 currently it is *only* possible to have integer data in a cell, not floating point data.
 in the future it will likely be possible to have floating point data and equations in cells, however that would likely require a lot of changes to the code
+
+# This project is megadead btw if you are genuinely interested in a terminal based spreadsheet program id reccomend SC-IM https://github.com/andmarti1424/sc-im
